@@ -1,6 +1,5 @@
-import java.io.*;
-class Main {
-public static void main(String args[]) throws IOException {
+class Main{
+public static void main(String args[]) throws java.io.IOException {
 IdLexer lex = new IdLexer(System.in);
 Token token = lex.yylex();
 while ( token.text != null ) {
@@ -8,7 +7,7 @@ token = lex.yylex(); //get next token
 }
 }
 }
-class Token {
+class Token{
 String text;
 Token(String t) { text = t; }
 }
