@@ -1,0 +1,29 @@
+import java.io.*;
+class Main{
+public static void main(String [] args) throws IOException{
+Yylex lex = new Yylex(System.in);
+Token token = lex.yylex();
+while(token.text!=null){
+token = lex.yylex();
+}
+}
+}
+
+class Token {
+String text;
+Token(String t) { text = t; }
+}
+%%
+%public
+%class Yylex
+%type void
+letter = [a-zA-Z]
+all = [a-zA-Z0-9_'*&]
+whitespace = [ \t\n]
+%type Token
+%eofval{
+return new Token(null);
+%eofval}
+%%
+[Aa]({letter}|{letter}{letter}|{letter}{letter}{letter}|{letter}{letter}{letter}{letter}) {System.out.print(yytext() + " is valid\n");} {whitespace}+ {/*skip white spaces*/}
+{all}|{all}{all}{all}{all}{all}{all}{all}* {System.out.print(yytext() + " is invalid\n");} {whitespace}+ {/*skip white spaces*/}
